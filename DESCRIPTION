@@ -1,0 +1,16 @@
+Package: MetaboChemTool
+Title: Common tools in metabolomics and cheminformatics 
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Zhiwei",
+           family = "Zhou",
+           role = c("aut", "cre"),
+           email = "zhiwei92@126.com",
+           comment = c(ORCID = "0000-0002-1249-6870"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
