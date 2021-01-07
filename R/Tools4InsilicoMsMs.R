@@ -1,3 +1,62 @@
+################################################################################
+# General ----------------------------------------------------------------------
+
+
+#' @title convertAdduct4Tools
+#' @description convert adduct types between different in-silico annotation tools
+#' @author Zhiwei Zhou
+#' @param adduct adduct type
+#' @param tool_from annotation tool name, including: 'metdna2', 'msfinder', 'sirius'. Default: 'metdna2'
+#' @param tool_to annotation tool name, including:  'metdna2', 'msfinder', 'sirius'. Default: 'metdna2'
+#' @export
+#' @examples
+#' # single adduct
+#' convertAdduct4Tools(adduct = '[M+H]+', tool_from = 'metdna2', tool_to = 'sirius')
+#' # multiple adducts
+#' convertAdduct4Tools(adduct = c('[M+H]+', '[M-H+2Na]+'), tool_from = 'metdna2', tool_to = 'msfinder')
+
+# convertAdduct4Tools(adduct = '[M+H]+', tool_from = 'metdna2', tool_to = 'sirius')
+# convertAdduct4Tools(adduct = c('[M+H]+', '[M-H+2Na]+'), tool_from = 'metdna2', tool_to = 'msfinder')
+
+setGeneric(name = 'convertAdduct4Tools',
+           def = function(
+             adduct,
+             tool_from = c('metdna2', 'msfinder', 'sirius'),
+             tool_to = c('metdna2', 'msfinder', 'sirius')
+           ){
+             tool_from <- match.arg(tool_from)
+             tool_to <- match.arg(tool_to)
+
+             switch (tool_from,
+                     'metdna2' = {list_adduct_from <- lib_adduct_conv$MetDNA2},
+                     'msfinder' = {list_adduct_from <- lib_adduct_conv$MSFINDER},
+                     'sirius' = {list_adduct_from <- lib_adduct_conv$SIRIUS}
+             )
+
+             switch (tool_to,
+                     'metdna2' = {list_adduct_to <- lib_adduct_conv$MetDNA2},
+                     'msfinder' = {list_adduct_to <- lib_adduct_conv$MSFINDER},
+                     'sirius' = {list_adduct_to <- lib_adduct_conv$SIRIUS}
+             )
+
+             idx <- match(adduct, list_adduct_from)
+
+             if (any(is.na(idx))) {
+               warning('Note: some adduct type not included in adduct_conv\n')
+             }
+
+             adduct_from <- list_adduct_from[idx]
+             adduct_to <- list_adduct_to[idx]
+
+             result <- tibble::tibble(adduct_input = adduct,
+                                      adduct_from = adduct_from,
+                                      adduct_to = adduct_to)
+
+             return(result)
+           })
+
+
+
 
 
 ################################################################################

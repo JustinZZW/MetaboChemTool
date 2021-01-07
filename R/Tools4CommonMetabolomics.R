@@ -1,9 +1,10 @@
 ################################################################################
 # Adduct mz calculation --------------------------------------------------------
 
+# ca
 #' @title calculateExactMass
 #' @author Zhiwei Zhou
-#' @description calculate exact mass
+#' @description calculate exact mass from formula
 #' @param formula chemical formula
 #' @export
 #' @examples
@@ -204,3 +205,48 @@ setGeneric(name = 'convertMz2Adduct',
              return(result)
 
            })
+
+
+
+
+#' @title generateFormulaMass
+#' @author Zhiwei Zhou
+#' @param smiles
+#' @return a data.frame with exact_mass and formula
+#' @export
+#' @examples
+#' test <- generateFormulaMass('CN1C=NC(C[C@H](N)C(O)=O)=C1')
+
+
+# generateFormulaMass('CN1C=NC(C[C@H](N)C(O)=O)=C1')
+
+setGeneric('generateFormulaMass',
+           def = function(smiles) {
+             if (is.na(smiles) | is.null(smiles)) {
+               formula_result <- data.frame(exact_mass=NA,
+                                            formula=NA,
+                                            stringsAsFactors = F)
+
+               return(formula_result)
+             }
+
+             molecule <- try(rcdk::parse.smiles(smiles)[[1]], silent = TRUE)
+
+             if (class(molecule) == 'try-error') {
+               formula_result <- data.frame(exact_mass=NA,
+                                            formula=NA,
+                                            stringsAsFactors = F)
+
+               return(formula_result)
+             }
+
+             rcdk::convert.implicit.to.explicit(molecule)
+             formula <- rcdk::get.mol2formula(molecule, charge=0)
+             formula_result <- data.frame(exact_mass=formula@mass,
+                                          formula=formula@string,
+                                          stringsAsFactors = F)
+
+             return(formula_result)
+           }
+)
+
