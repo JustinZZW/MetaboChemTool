@@ -10,7 +10,7 @@ calculateExactMass(formula)
 \item{formula}{chemical formula}
 }
 \description{
-calculate exact mass
+calculate exact mass from formula
 }
 \examples{
 calculateExactMass(formula = "C2H5OH")

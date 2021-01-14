@@ -1,6 +1,6 @@
 Package: MetaboChemTool
 Title: Common tools in metabolomics and cheminformatics 
-Version: 0.0.0.9001
+Version: 0.0.1.0
 Authors@R: 
     person(given = "Zhiwei",
            family = "Zhou",
@@ -21,6 +21,7 @@ Imports:
     tidyr,
     readr,
     purrr,
-    tibble
+    tibble,
+    xml2
 Depends: 
     R (>= 2.10)
