@@ -15,3 +15,6 @@
 
 # 20210114 v0.0.1.01
 * Add functions: limitElements()
+
+# 20210514 v0.0.1.02
+* Add functions: add MetDNA adducts

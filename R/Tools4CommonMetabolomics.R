@@ -418,5 +418,6 @@ Version 0.0.1.01 (20210125)
 * Add manual for: calculateMz, transformMz, generateFormulaMassFromSmiles
 * Add function name: generateFormula ---> generateFormulaMassFromSmiles
 * Add functions: limitElements()
+* Add MetDNA adducts
 ")
 }
