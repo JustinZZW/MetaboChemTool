@@ -10,3 +10,9 @@
 # lib_adduct_conv <- readxl::read_xlsx('H:/00_projects/03_MetDNA2/06_files_for_package/temp/adduct_conversion_different_tools.xlsx')
 # library(devtools)
 # use_data(lib_adduct_conv)
+
+
+################################################################################
+# 20210514 add adduct table of different in-silico tools -----------------------
+# lib_adduct_conv <- readxl::read_xlsx('./inst/lib_adduct_conv_210514.xlsx')
+# usethis::use_data(lib_adduct_conv, overwrite = TRUE)

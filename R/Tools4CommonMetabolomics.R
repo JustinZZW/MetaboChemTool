@@ -349,17 +349,75 @@ setGeneric(name = 'convertStructureFormat',
 
 
 ################################################################################
+# formula functions ------------------------------------------------------------
+
+#' @title limitElements
+#' @author Zhiwei Zhou
+#' @param cpd_formula
+#' @param element_necessary Necessary elements. Default: 'C'
+#' @param element_included Limit elements. Default: c("C", 'H', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I')
+#' @return Logistical value. TRUE or FALSE
+#' @export
+#' @example
+#' cpd_formula <- 'H2O'
+#' limitElements(cpd_formula)
+#' cpd_formula <- 'C6H12O6'
+#' limitElements(cpd_formula)
+#' cpd_formula <- 'C55H68MgN4O6'
+#' limitElements(cpd_formula)
+
+# cpd_formula <- 'H2O'
+# limitElements(cpd_formula)
+# cpd_formula <- 'C6H12O6'
+# limitElements(cpd_formula)
+# cpd_formula <- 'C55H68MgN4O6'
+# limitElements(cpd_formula)
+# cpd_formula <- 'C53H60ClN3O16'
+# limitElements(cpd_formula)
+
+
+setGeneric(name = 'limitElements',
+           def = function(cpd_formula,
+                          element_necessary = 'C',
+                          element_included = c("C", 'H', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I')){
+             if (missing(cpd_formula)) {
+               stop('Please input cpd_formula')
+             }
+
+             element_composition <- try(CHNOSZ::makeup(formula = cpd_formula),
+                                        silent = TRUE)
+
+
+
+             element_all <- names(element_composition)
+
+             if (!(element_necessary %in% element_all)) {
+               return(FALSE)
+             }
+
+             if (all(element_all %in% element_included)) {
+               return(TRUE)
+             } else {
+               return(FALSE)
+             }
+
+           })
+
+
+################################################################################
 # startup message --------------------------------------------------------------
 .onAttach <- function(libname, pkgname){
   packageStartupMessage("
 If you have any questions, please send email to zhiwei92@126.com.
 Authors: Zhiwei Zhou.
 Maintainer: Zhiwei Zhou
-Version 0.0.1.0 (20210114)
+Version 0.0.1.01 (20210125)
 --------------
 * Add module: Tools4PublicDB
 * Add functions: extractPropertyFromHMDB(), extractPropertyFromPubChem(), convertStructureFormat()
 * Add manual for: calculateMz, transformMz, generateFormulaMassFromSmiles
 * Add function name: generateFormula ---> generateFormulaMassFromSmiles
+* Add functions: limitElements()
+* Add MetDNA adducts
 ")
 }

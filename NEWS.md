@@ -11,3 +11,10 @@
 * Add functions: extractPropertyFromHMDB(), extractPropertyFromPubChem(), convertStructureFormat()
 * Add manual for: calculateMz, transformMz, generateFormulaMassFromSmiles
 * Add function name: generateFormula ---> generateFormulaMassFromSmiles
+
+
+# 20210114 v0.0.1.01
+* Add functions: limitElements()
+
+# 20210514 v0.0.1.02
+* Add functions: add MetDNA adducts
