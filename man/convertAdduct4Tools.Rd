@@ -6,8 +6,8 @@
 \usage{
 convertAdduct4Tools(
   adduct,
-  tool_from = c("metdna2", "msfinder", "sirius"),
-  tool_to = c("metdna2", "msfinder", "sirius")
+  tool_from = c("metdna2", "msfinder", "sirius", "metdna"),
+  tool_to = c("metdna2", "msfinder", "sirius", "metdna")
 )
 }
 \arguments{
