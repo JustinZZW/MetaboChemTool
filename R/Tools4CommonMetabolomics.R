@@ -411,7 +411,7 @@ setGeneric(name = 'limitElements',
 If you have any questions, please send email to zhiwei92@126.com.
 Authors: Zhiwei Zhou.
 Maintainer: Zhiwei Zhou
-Version 0.0.1.01 (20210125)
+Version 0.0.1.02 (20210125)
 --------------
 * Add module: Tools4PublicDB
 * Add functions: extractPropertyFromHMDB(), extractPropertyFromPubChem(), convertStructureFormat()

@@ -27,6 +27,8 @@ setGeneric(name = 'convertAdduct4Tools',
              tool_from <- match.arg(tool_from)
              tool_to <- match.arg(tool_to)
 
+             # data('lib_adduct_conv', envir = environment())
+
              switch (tool_from,
                      'metdna2' = {list_adduct_from <- lib_adduct_conv$MetDNA2},
                      'msfinder' = {list_adduct_from <- lib_adduct_conv$MSFINDER},
@@ -38,7 +40,7 @@ setGeneric(name = 'convertAdduct4Tools',
                      'metdna2' = {list_adduct_to <- lib_adduct_conv$MetDNA2},
                      'msfinder' = {list_adduct_to <- lib_adduct_conv$MSFINDER},
                      'sirius' = {list_adduct_to <- lib_adduct_conv$SIRIUS},
-                     'sirius' = {list_adduct_to <- lib_adduct_conv$MetDNA}
+                     'metdna' = {list_adduct_to <- lib_adduct_conv$MetDNA}
              )
 
              idx <- match(adduct, list_adduct_from)
