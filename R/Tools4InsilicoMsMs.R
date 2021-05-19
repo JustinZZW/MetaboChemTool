@@ -175,3 +175,169 @@ setGeneric(name = 'convertAdduct4Sirius',
              return(result)
 
            })
+
+################################################################################
+# MetDNA2 ----------------------------------------------------------------------
+
+#' @title copyMetDNA2
+#' @author Zhiwei Zhou
+#' @param path_from '.'
+#' @param path_to '.'
+#' @param dir_ignore file names for ignore
+#' @export
+#' @examples
+#' copyMetDNA2(path_from = 'Z:/memberdata/ZHOUzhiwei/01_data/20210517_nist_urine_extended_steps/dp_pos_step0',
+#'             path_to = 'H:/00_projects/03_MetDNA2/00_data/20210519_mutiple_ext_step_nist_urine',
+#'             dir_ignore = '02_formula_prediction')
+
+# copyMetDNA2(path_from = 'Z:/memberdata/ZHOUzhiwei/01_data/20210517_nist_urine_extended_steps/dp_pos_step0',
+#             path_to = 'H:/00_projects/03_MetDNA2/00_data/20210519_mutiple_ext_step_nist_urine',
+#             dir_ignore = '02_formula_prediction')
+
+setGeneric(name = 'copyMetDNA2',
+           function(
+             path_from = '.',
+             path_to = '.',
+             dir_ignore = NULL
+           ){
+             # 00 annotation table
+             file_list <- list.files(file.path(path_from, '00_annotation_table'))
+             if (length(dir_ignore) > 0) {
+               file_list <- file_list[!(file_list %in% dir_ignore)]
+             }
+
+             if ('00_intermediate_data' %in% file_list) {
+               dir.create(file.path(path_to, '00_annotation_table', '00_intermediate_data'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '00_annotation_table', '00_intermediate_data'),
+                         to = file.path(path_to, '00_annotation_table'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             file_list <- file_list[!(file_list %in% c('00_intermediate_data'))]
+
+             walk(file_list, function(x){
+               file.copy(from = file.path(path_from, '00_annotation_table', x),
+                         to = file.path(path_to, '00_annotation_table'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             })
+
+
+
+
+             # 01 01 result initial seed annotation
+             file_list <- list.files(file.path(path_from, '01_result_initial_seed_annotation'))
+             if (length(dir_ignore) > 0) {
+               file_list <- file_list[!(file_list %in% dir_ignore)]
+             }
+
+             if ('00_intermediate_data' %in% file_list) {
+               dir.create(file.path(path_to, '01_result_initial_seed_annotation', '00_intermediate_data'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '01_result_initial_seed_annotation', '00_intermediate_data'),
+                         to = file.path(path_to, '01_result_initial_seed_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             if ('01_rt_calibration_plot' %in% file_list) {
+               dir.create(file.path(path_to, '01_result_initial_seed_annotation', '01_rt_calibration_plot'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '01_result_initial_seed_annotation', '01_rt_calibration_plot'),
+                         to = file.path(path_to, '01_result_initial_seed_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             if ('02_experimental_ms2_spec_plot' %in% file_list) {
+               dir.create(file.path(path_to, '01_result_initial_seed_annotation', '02_experimental_ms2_spec_plot'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '01_result_initial_seed_annotation', '02_experimental_ms2_spec_plot'),
+                         to = file.path(path_to, '01_result_initial_seed_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+
+             file_list <- file_list[!(file_list %in% c('00_intermediate_data',
+                                                       '01_rt_calibration_plot',
+                                                       '02_experimental_ms2_spec_plot'))]
+
+             walk(file_list, function(x){
+               file.copy(from = file.path(path_from, '01_result_initial_seed_annotation', x),
+                         to = file.path(path_to, '01_result_initial_seed_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             })
+
+
+             # 02 result MRN annotation --------------------------------
+             file_list <- list.files(file.path(path_from, '02_result_MRN_annotation'))
+             if (length(dir_ignore) > 0) {
+               file_list <- file_list[!(file_list %in% dir_ignore)]
+             }
+
+             if ('00_intermediate_data' %in% file_list) {
+               dir.create(file.path(path_to, '02_result_MRN_annotation', '00_intermediate_data'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '02_result_MRN_annotation', '00_intermediate_data'),
+                         to = file.path(path_to, '02_result_MRN_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             if ('01_surrogate_ms2_spec_plot' %in% file_list) {
+               dir.create(file.path(path_to, '02_result_MRN_annotation', '01_surrogate_ms2_spec_plot'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '02_result_MRN_annotation', '01_surrogate_ms2_spec_plot'),
+                         to = file.path(path_to, '02_result_MRN_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             file_list <- file_list[!(file_list %in% c('00_intermediate_data', '01_surrogate_ms2_spec_plot'))]
+
+
+             walk(file_list, function(x){
+               file.copy(from = file.path(path_from, '02_result_MRN_annotation', x),
+                         to = file.path(path_to, '02_result_MRN_annotation'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             })
+
+
+
+             # 03 annotation credential -----------------------------
+             file_list <- list.files(file.path(path_from, '03_annotation_credential'))
+             if (length(dir_ignore) > 0) {
+               file_list <- file_list[!(file_list %in% dir_ignore)]
+             }
+
+             if ('00_intermediate_data' %in% file_list) {
+               dir.create(file.path(path_to, '03_annotation_credential', '00_intermediate_data'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '03_annotation_credential', '00_intermediate_data'),
+                         to = file.path(path_to, '03_annotation_credential'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             if ('01_pseudo_MS1_spec' %in% file_list) {
+               dir.create(file.path(path_to, '03_annotation_credential', '01_pseudo_MS1_spec'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '03_annotation_credential', '01_pseudo_MS1_spec'),
+                         to = file.path(path_to, '03_annotation_credential'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             if ('02_formula_prediction' %in% file_list) {
+               dir.create(file.path(path_to, '03_annotation_credential', '02_formula_prediction'),
+                          showWarnings = FALSE, recursive = TRUE)
+               file.copy(from = file.path(path_from, '03_annotation_credential', '02_formula_prediction'),
+                         to = file.path(path_to, '03_annotation_credential'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             }
+
+             file_list <- file_list[!(file_list %in% c('00_intermediate_data', '01_pseudo_MS1_spec', '02_formula_prediction'))]
+
+             walk(file_list, function(x){
+               file.copy(from = file.path(path_from, '03_annotation_credential', x),
+                         to = file.path(path_to, '03_annotation_credential'),
+                         recursive = TRUE, overwrite = TRUE, copy.date = TRUE)
+             })
+
+
+           })
+

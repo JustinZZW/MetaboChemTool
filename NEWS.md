@@ -18,3 +18,6 @@
 
 # 20210514 v0.0.1.02
 * Add functions: add MetDNA adducts
+
+# 20210519 v0.0.1.03
+* Add functions: copyMetDNA2
