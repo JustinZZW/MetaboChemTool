@@ -6,8 +6,8 @@
 #' @description convert adduct types between different in-silico annotation tools
 #' @author Zhiwei Zhou
 #' @param adduct adduct type
-#' @param tool_from annotation tool name, including: 'metdna2', 'msfinder', 'sirius'. Default: 'metdna2'
-#' @param tool_to annotation tool name, including:  'metdna2', 'msfinder', 'sirius'. Default: 'metdna2'
+#' @param tool_from annotation tool name, including: 'metdna2', 'msfinder', 'sirius', 'metdna', 'metdna1_hilic', 'metdna1_rp'. Default: 'metdna2'
+#' @param tool_to annotation tool name, including:  'metdna2', 'msfinder', 'sirius', 'metdna', 'metdna1_hilic', 'metdna1_rp'. Default: 'metdna2'
 #' @export
 #' @examples
 #' # single adduct
@@ -21,8 +21,8 @@
 setGeneric(name = 'convertAdduct4Tools',
            def = function(
              adduct,
-             tool_from = c('metdna2', 'msfinder', 'sirius', 'metdna'),
-             tool_to = c('metdna2', 'msfinder', 'sirius', 'metdna')
+             tool_from = c('metdna2', 'msfinder', 'sirius', 'metdna', 'metdna1_hilic', 'metdna1_rp'),
+             tool_to = c('metdna2', 'msfinder', 'sirius', 'metdna', 'metdna1_hilic', 'metdna1_rp')
            ){
              tool_from <- match.arg(tool_from)
              tool_to <- match.arg(tool_to)
@@ -33,14 +33,18 @@ setGeneric(name = 'convertAdduct4Tools',
                      'metdna2' = {list_adduct_from <- lib_adduct_conv$MetDNA2},
                      'msfinder' = {list_adduct_from <- lib_adduct_conv$MSFINDER},
                      'sirius' = {list_adduct_from <- lib_adduct_conv$SIRIUS},
-                     'metdna' = {list_adduct_from <- lib_adduct_conv$MetDNA}
+                     'metdna' = {list_adduct_from <- lib_adduct_conv$MetDNA},
+                     'metdna1_hilic' = {list_adduct_from <- lib_adduct_conv$MetDNA1_hilic},
+                     'metdna1_rp' = {list_adduct_from <- lib_adduct_conv$MetDNA1_rp}
              )
 
              switch (tool_to,
                      'metdna2' = {list_adduct_to <- lib_adduct_conv$MetDNA2},
                      'msfinder' = {list_adduct_to <- lib_adduct_conv$MSFINDER},
                      'sirius' = {list_adduct_to <- lib_adduct_conv$SIRIUS},
-                     'metdna' = {list_adduct_to <- lib_adduct_conv$MetDNA}
+                     'metdna' = {list_adduct_to <- lib_adduct_conv$MetDNA},
+                     'metdna1_hilic' = {list_adduct_to <- lib_adduct_conv$MetDNA1_hilic},
+                     'metdna1_rp' = {list_adduct_to <- lib_adduct_conv$MetDNA1_rp}
              )
 
              idx <- match(adduct, list_adduct_from)

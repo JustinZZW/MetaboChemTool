@@ -1,6 +1,6 @@
 Package: MetaboChemTool
 Title: Common tools in metabolomics and cheminformatics 
-Version: 0.0.1.02
+Version: 0.0.1.04
 Authors@R: 
     person(given = "Zhiwei",
            family = "Zhou",

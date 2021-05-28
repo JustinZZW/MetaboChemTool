@@ -21,3 +21,6 @@
 
 # 20210519 v0.0.1.03
 * Add functions: copyMetDNA2
+
+# 20210528 v0.0.1.04
+* Add 'metdna1_hilic', 'metdna1_rp' types in lib_adduct_conv

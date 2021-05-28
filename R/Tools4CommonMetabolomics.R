@@ -424,5 +424,6 @@ Version 0.0.1.03 (20210519)
 * Add functions: limitElements()
 * Add MetDNA adducts
 * Add functions: copyMetDNA2
+* Add 'metdna1_hilic', 'metdna1_rp' types in lib_adduct_conv
 ")
 }
